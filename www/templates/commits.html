@@ -1,0 +1,15 @@
+<ion-view title="Repository Detail View">
+  <ion-nav-bar>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content ng-controller="CommitsCtrl">
+    <ion-list>
+      <ion-item class="item-avatar" ng-repeat="(key, value) in commits">
+        <img ng-src="{{value.author.avatar_url}}">
+        <h2>{{value.commit.message}}</h2>
+        <p>{{value.commit.author.date | date}}</p>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

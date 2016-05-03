@@ -1,0 +1,45 @@
+<ion-view title="Repository Detail View">
+  <ion-nav-bar>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content ng-controller="DetailCtrl">
+    <div class="list card">
+      <div class="item item-avatar">
+        <img ng-src="{{repo.owner.avatar_url}}">
+        <h2>{{repo.name}} ({{repo.full_name}})</h2>
+        <p>By {{repo.owner.login}}</p>
+      </div>
+      <div class="item item-body">
+        <b ng-if="repo.description">
+          Description:
+        </b>
+        <p ng-if="repo.description">
+          {{repo.description}}
+        </p>
+        <b>
+          Size:
+        </b>
+        <p>
+          {{repo.size}}
+        </p>
+        <b>
+          Language:
+        </b>
+        <p>
+          {{repo.language}}
+        </p>
+        <b>
+          Homepage:
+        </b>
+        <p>
+          <a ng-href="{{repo.html_url}}">{{repo.html_url}}</a>
+        </p>
+      </div>
+      <ion-item class="item item-icon-right" ng-href="/#/repos/{{repo.owner.login}}/{{repo.name}}/commits">
+        Show Commits
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </div>
+  </ion-content>
+</ion-view>
