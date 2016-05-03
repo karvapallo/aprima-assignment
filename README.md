@@ -1,8 +1,13 @@
 #Aprima Assignment
 
-I built this project using a blank Ionic tamplate.
+This project was done as an assignment for Aprima. I built this project 
+by starting off with a blank Ionic template and adding the requested features.
 
-It has been tested with:
+I also added infinite scrolling to the search results and commits view, although
+that wasn't strictly required.
+
+The projects has been tested with:
+
 ```
 ionic 1.7.14
 cordova 5.4.1
