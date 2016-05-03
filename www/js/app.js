@@ -3,7 +3,13 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'aprima-assignment.controllers'])
+angular.module('aprima-assignment', [
+  'ionic',
+  'aprima-assignment.resources',
+  'aprima-assignment.controllers',
+  'aprima-assignment.services',
+  'ngCordova',
+  'ig.linkHeaderParser'])
 
   .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -27,7 +33,7 @@ angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'ap
 
       .state('app', {
         abstract: true,
-        templateUrl: '../templates/app.html',
+        templateUrl: 'templates/app.html',
         controller: 'AppCtrl'
       })
 
@@ -36,7 +42,7 @@ angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'ap
         views: {
           'content': {
             controller: 'SearchCtrl',
-            templateUrl: '../templates/search.html'
+            templateUrl: 'templates/search.html'
           }
         }
       })
@@ -45,7 +51,7 @@ angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'ap
         url: '/repos/:owner/:repo',
         views: {
           'content': {
-            templateUrl: '../templates/detail.html'
+            templateUrl: 'templates/detail.html'
           }
         }
       })
@@ -54,7 +60,7 @@ angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'ap
         url: '/repos/:owner/:repo/commits',
         views: {
           'content': {
-            templateUrl: '../templates/commits.html'
+            templateUrl: 'templates/commits.html'
           }
         }
       });
@@ -65,3 +71,4 @@ angular.module('aprima-assignment', ['ionic', 'aprima-assignment.resources', 'ap
 
 angular.module('aprima-assignment.controllers', []);
 angular.module('aprima-assignment.resources', ['ngResource']);
+angular.module('aprima-assignment.services', []);

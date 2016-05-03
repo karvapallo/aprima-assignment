@@ -6,7 +6,14 @@ angular.module('aprima-assignment.resources')
     };
     var actions = {
       query: {
-        array: false
+        method: 'GET',
+        isArray: false,
+        interceptor: {
+          response: function(response) {
+            response.resource.$httpHeaders = response.headers;
+            return response.resource;
+          }
+        }
       }
     };
     return $resource(url, params, actions);

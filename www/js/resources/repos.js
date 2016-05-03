@@ -9,7 +9,13 @@ angular.module('aprima-assignment.resources')
       commits: {
         method: 'GET',
         isArray: true,
-        url: url + '/commits'
+        url: url + '/commits',
+        interceptor: {
+          response: function(response) {
+            response.resource.$httpHeaders = response.headers;
+            return response.resource;
+          }
+        }
       }
     };
     return $resource(url, params, actions);

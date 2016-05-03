@@ -2,36 +2,26 @@ angular.module('aprima-assignment.controllers')
 
   .controller('SearchCtrl', function ($scope,
                                       SearchResource,
-                                      $timeout) {
+                                      $timeout,
+                                      $http,
+                                      paginationService) {
 
     $scope.searching = false;
     $scope.error = false;
     $scope.repos = [];
     $scope.keyword = '';
 
-    var totalItems = 0;
-    var currentPage = 1;
+    var nextPageUrl = false;
     var doSearch = function doSearch() {
       $scope.searching = true;
       SearchResource
-        .query({path: 'repositories', q: $scope.keyword, page: currentPage })
+        .query({path: 'repositories', q: $scope.keyword })
         .$promise
         .then(function (result) {
-          console.log('result.items.length:', result.items.length);
-          if (currentPage == 1) {
-            $scope.repos = result.items;
-          } else {
-            $scope.repos = $scope.repos.concat(result.items);
-          }
-
-          $timeout(function() {
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-          }, 300);
-
-          totalItems = result.total_count;
+          nextPageUrl = paginationService.setNextLink(result.$httpHeaders);
+          $scope.repos = result.items;
         })
         .catch(function (err) {
-          console.log(err);
           $scope.repos = [];
           $scope.error = err.statusText;
         })
@@ -44,18 +34,12 @@ angular.module('aprima-assignment.controllers')
       function (newVal, oldVal) {
         $scope.$apply(function() {
 
-          if (newVal == '') {
+          $scope.error = false;
 
-            $scope.error = false;
+          if (newVal === '') {
             $scope.searching = false;
             $scope.repos = [];
-            currentPage = 1;
             return;
-          }
-
-          $scope.error = false;
-          if (newVal != oldVal) {
-            currentPage = 1;
           }
 
           doSearch();
@@ -69,12 +53,24 @@ angular.module('aprima-assignment.controllers')
     );
 
     $scope.showLoadMore = function showLoadMore() {
-      return totalItems > $scope.repos.length;
+      return nextPageUrl;
     };
 
     $scope.loadMore = function loadMore() {
-      currentPage += 1;
-      doSearch();
+      $http({ method: 'GET', url: nextPageUrl })
+        .then(function (result) {
+          nextPageUrl = paginationService.setNextLink(result.headers);
+          $scope.repos = $scope.repos.concat(result.data.items);
+        })
+        .catch(function (err) {
+          $scope.repos = [];
+          $scope.error = err.statusText;
+        })
+        .finally(function () {
+          $timeout(function () {
+            $scope.$broadcast('scroll.infiniteScrollComplete');
+          });
+        });
     };
 
     $scope.$watch('keyword', debounced);

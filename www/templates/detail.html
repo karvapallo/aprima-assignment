@@ -33,10 +33,10 @@
           Homepage:
         </b>
         <p>
-          <a ng-href="{{repo.html_url}}">{{repo.html_url}}</a>
+          <a ng-click="openUrl(repo.html_url)">{{repo.html_url}}</a>
         </p>
       </div>
-      <ion-item class="item item-icon-right" ng-href="/#/repos/{{repo.owner.login}}/{{repo.name}}/commits">
+      <ion-item class="item item-icon-right" ng-href="#/repos/{{repo.owner.login}}/{{repo.name}}/commits">
         Show Commits
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>

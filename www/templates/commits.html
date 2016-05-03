@@ -5,11 +5,16 @@
   </ion-nav-bar>
   <ion-content ng-controller="CommitsCtrl">
     <ion-list>
+      <ion-item ng-if="error" style="text-align: center">
+        {{error}}
+      </ion-item>
       <ion-item class="item-avatar" ng-repeat="(key, value) in commits">
         <img ng-src="{{value.author.avatar_url}}">
         <h2>{{value.commit.message}}</h2>
         <p>{{value.commit.author.date | date}}</p>
       </ion-item>
+      <ion-infinite-scroll ng-if="showLoadMore()" on-infinite="loadMore()" distance="1%" immediate-check="false">
+      </ion-infinite-scroll>
     </ion-list>
   </ion-content>
 </ion-view>
