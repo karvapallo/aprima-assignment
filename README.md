@@ -1,25 +1,75 @@
-Ionic App Base
-=====================
+#Aprima Assignment
 
-A starting project for Ionic that optionally supports using custom SCSS.
+I built this project using a blank Ionic tamplate.
 
-## Using this project
-
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
-
-```bash
-$ npm install -g ionic
+It has been tested with:
+```
+ionic 1.7.14
+cordova 5.4.1
+ios 9.3.1 (built with XCode 7.3) 
 ```
 
-Then run: 
 
-```bash
-$ ionic start myProject tabs
+##Requirements
+
+This application is built with Ionic and Cordova (5), so you need to install those:
+
+```
+npm install -g ionic cordova@5
 ```
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+If you don't have Node.js and NPM on your machine, please check the installation instructions
+for your platform [here](https://nodejs.org/en/).
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+##Installation
+
+Clone the repository:
+
+```
+git clone https://github.com/karvapallo/aprima-assignment
+```
+
+Then add the platforms and plugins (only necessary if you want to run it on a decice or a simulator):
+
+```
+ionic state reset
+```
+
+##Running the project
+
+You can run the project in the browser, simulator or run it on your actual device.
+
+###Browser
+
+To run it in the browser:
+
+```
+ionic serve
+```
+
+Or if you want to get fancy and run the iOS and Android version side by side in the browser:
+
+```
+ionic serve --lab
+```
+
+###iOS
+
+If you want to build it for your phone, for iOS I recommend opening the `ios` project
+with XCode (under platforms/ios) and compile it with XCode.
+
+###Android
+
+The App has not been tested with an Android device, and if you want to try it out
+you should first add the platform:
+
+```
+ionic platform add android
+```
+
+For Android, if you have the correct build environment set up, you should be able to build it
+with:
+
+```
+ionic run android --device
+```
